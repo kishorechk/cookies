@@ -9,9 +9,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Cookie Finder Service Implementation
+ *
+ */
 public class CookieFinderServiceImpl implements CookieFinderService{
 
-    public List<String> getCookie(List<Cookie> cookiesList, String date) {
+    /**
+     * returns list of active cookies for given date
+     *
+     */
+    public List<String> getCookiesList(List<Cookie> cookiesList, String date) {
         LocalDate inputDate = LocalDate.parse(date);
         Map<String, Long> cookieCountMap = cookiesList.stream()
                 .filter(cookie ->  isValidCookie(cookie, inputDate))

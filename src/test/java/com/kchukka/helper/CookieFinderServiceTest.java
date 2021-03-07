@@ -22,13 +22,13 @@ public class CookieFinderServiceTest {
         CookieParserService CookieParserService = new CookieParserServiceImpl(cookieFileConfiguration);
         List<Cookie> cookiesList = CookieParserService.getCookiesList();
         CookieFinderService cookieFinderService = new CookieFinderServiceImpl();
-        List<String> result = cookieFinderService.getCookie(cookiesList, "2018-12-09");
+        List<String> result = cookieFinderService.getCookiesList(cookiesList, "2018-12-09");
         assertEquals(1, result.size());
         assertEquals("AtY0laUfhglK3lC7", result.get(0));
     }
 
     @Test
-    public void test_getCookie_ValidDate_MultipleCookie() {
+    public void test_getCookie_ValidDate_MultipleActiveCookies() {
         URL resource = getClass().getClassLoader().getResource("cookies.csv");
         CookieFileConfiguration cookieFileConfiguration = new CookieFileConfiguration();
         cookieFileConfiguration.setFilePath(resource.getPath());
@@ -36,13 +36,15 @@ public class CookieFinderServiceTest {
         CookieParserService CookieParserService = new CookieParserServiceImpl(cookieFileConfiguration);
         List<Cookie> cookiesList = CookieParserService.getCookiesList();
         CookieFinderService cookieFinderService = new CookieFinderServiceImpl();
-        List<String> result = cookieFinderService.getCookie(cookiesList, "2018-12-08");
+        List<String> result = cookieFinderService.getCookiesList(cookiesList, "2018-12-08");
         assertEquals(3, result.size());
         assertEquals("fbcn5UAVanZf6UtG", result.get(0));
+        assertEquals("SAZuXPGUrfbcn5UA", result.get(1));
+        assertEquals("4sMM2LxV07bPJzwf", result.get(2));
     }
 
     @Test
-    public void test_getCookie_InValidDate() {
+    public void test_getCookie_InValidDate_EmptyCookiesList() {
         URL resource = getClass().getClassLoader().getResource("cookies.csv");
         CookieFileConfiguration cookieFileConfiguration = new CookieFileConfiguration();
         cookieFileConfiguration.setFilePath(resource.getPath());
@@ -50,7 +52,7 @@ public class CookieFinderServiceTest {
         CookieParserService CookieParserService = new CookieParserServiceImpl(cookieFileConfiguration);
         List<Cookie> cookiesList = CookieParserService.getCookiesList();
         CookieFinderService cookieFinderService = new CookieFinderServiceImpl();
-        List<String> result = cookieFinderService.getCookie(cookiesList, "2019-12-09");
+        List<String> result = cookieFinderService.getCookiesList(cookiesList, "2019-12-09");
         assertEquals(0, result.size());
     }
 }

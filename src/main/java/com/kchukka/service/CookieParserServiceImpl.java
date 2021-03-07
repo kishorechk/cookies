@@ -11,6 +11,10 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Cookie Parser Service Implementation
+ *
+ */
 public class CookieParserServiceImpl implements CookieParserService{
     private CookieFileConfiguration cookieFileConfiguration;
 
@@ -18,6 +22,10 @@ public class CookieParserServiceImpl implements CookieParserService{
         this.cookieFileConfiguration = cookieFileConfiguration;
     }
 
+    /**
+     * reads the csv file and return list of cookies
+     *
+     */
     public List<Cookie> getCookiesList() {
         String delimiter = cookieFileConfiguration.getDelimiter();
         List<Cookie> result = new ArrayList<>();

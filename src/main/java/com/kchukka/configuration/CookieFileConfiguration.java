@@ -1,5 +1,9 @@
 package com.kchukka.configuration;
 
+/**
+ * Cookie File Configuration
+ *
+ */
 public class CookieFileConfiguration {
     private String filePath;
     private String delimiter;

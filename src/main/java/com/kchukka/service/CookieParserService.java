@@ -6,5 +6,5 @@ import java.io.IOException;
 import java.util.List;
 
 public interface CookieParserService {
-    public List<Cookie> getCookiesList();
+    List<Cookie> getCookiesList();
 }

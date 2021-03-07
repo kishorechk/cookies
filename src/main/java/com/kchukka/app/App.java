@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Hello world!
+ * Main class
  *
  */
 public class App 
@@ -20,13 +20,16 @@ public class App
         if(args.length<2) {
             throw new RuntimeException("Incorrect no. of arguments");
         }
+        //1. create configuration
         CookieFileConfiguration cookieFileConfiguration = new CookieFileConfiguration();
         cookieFileConfiguration.setFilePath(args[0]);
         cookieFileConfiguration.setDelimiter(",");
+        //2. parse the csv file
         CookieParserService cookieParserService = new CookieParserServiceImpl(cookieFileConfiguration);
         List<Cookie> cookiesList = cookieParserService.getCookiesList();
+        //3. find active cookies for given date
         CookieFinderService cookieFinderService = new CookieFinderServiceImpl();
-        List<String> result = cookieFinderService.getCookie(cookiesList, args[1]);
+        List<String> result = cookieFinderService.getCookiesList(cookiesList, args[1]);
         if(result.isEmpty()) {
             System.out.println("No active cookies found for the given date");
         }
