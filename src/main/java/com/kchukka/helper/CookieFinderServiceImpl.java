@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class CookieFinder {
+public class CookieFinderServiceImpl implements CookieFinderService{
 
     public List<String> getCookie(List<Cookie> cookiesList, String date) {
         LocalDate inputDate = LocalDate.parse(date);
@@ -29,7 +29,7 @@ public class CookieFinder {
         return result;
     }
 
-    private static boolean isValidCookie(Cookie cookie, LocalDate date) {
+    private boolean isValidCookie(Cookie cookie, LocalDate date) {
         return date!=null && cookie.getTimestamp()!=null && date.compareTo(cookie.getTimestamp())==0;
     }
 }

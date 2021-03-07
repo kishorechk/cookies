@@ -1,7 +1,8 @@
 package com.kchukka.app;
 
 import com.kchukka.configuration.CookieFileConfiguration;
-import com.kchukka.helper.CookieFinder;
+import com.kchukka.helper.CookieFinderService;
+import com.kchukka.helper.CookieFinderServiceImpl;
 import com.kchukka.model.Cookie;
 import com.kchukka.service.CookieParserService;
 import com.kchukka.service.CookieParserServiceImpl;
@@ -24,7 +25,8 @@ public class App
         cookieFileConfiguration.setDelimiter(",");
         CookieParserService cookieParserService = new CookieParserServiceImpl(cookieFileConfiguration);
         List<Cookie> cookiesList = cookieParserService.getCookiesList();
-        List<String> result = new CookieFinder().getCookie(cookiesList, args[1]);
+        CookieFinderService cookieFinderService = new CookieFinderServiceImpl();
+        List<String> result = cookieFinderService.getCookie(cookiesList, args[1]);
         if(result.isEmpty()) {
             System.out.println("No active cookies found for the given date");
         }

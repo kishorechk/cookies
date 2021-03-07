@@ -26,7 +26,7 @@ public class CookieParserServiceImpl implements CookieParserService{
         try {
             lines = Files.readAllLines(Paths.get(cookieFileConfiguration.getFilePath()));
         } catch (IOException e) {
-            throw new RuntimeException("Unable to read the file");
+            throw new RuntimeException("Unable to read the file, please provide correct file path.");
         }
 
         for(int i=1; i<lines.size(); i++) {
