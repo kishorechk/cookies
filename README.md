@@ -12,5 +12,5 @@ cd cookies
 
 ./mvnw package
 
-./cookie-finder -fcookies.csv -d2018-12-09
+./cookies-finder.sh -fcookies.csv -d2018-12-09
 ```
