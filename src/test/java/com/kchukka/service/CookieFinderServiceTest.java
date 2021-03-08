@@ -1,4 +1,4 @@
-package com.kchukka.helper;
+package com.kchukka.service;
 
 import com.kchukka.configuration.CookieFileConfiguration;
 import com.kchukka.model.Cookie;

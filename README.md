@@ -21,3 +21,6 @@ cd cookies
 * -d parameter takes date in UTC time zone.
 * have enough memory to store the contents of the whole file.
 * Cookies in the log file are sorted by timestamp (most recent occurrence is the first line of the file).
+
+## Class Diagram
+![class diagram](cookies-classdiagram.png "Class Diagram")
