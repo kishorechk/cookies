@@ -6,6 +6,8 @@ import com.kchukka.helper.CookieFinderServiceImpl;
 import com.kchukka.model.Cookie;
 import com.kchukka.service.CookieParserService;
 import com.kchukka.service.CookieParserServiceImpl;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,10 +18,14 @@ import java.util.List;
  */
 public class App 
 {
+    private static Logger logger = LogManager.getLogger(CookieFinderServiceImpl.class);
+
     public static void main( String[] args ) throws IOException {
         if(args.length<2) {
             throw new RuntimeException("Incorrect no. of arguments");
         }
+        logger.debug("File: " + args[0]);
+        logger.debug("Date: " + args[1]);
         //1. create configuration
         CookieFileConfiguration cookieFileConfiguration = new CookieFileConfiguration();
         cookieFileConfiguration.setFilePath(args[0]);
@@ -31,6 +37,7 @@ public class App
         CookieFinderService cookieFinderService = new CookieFinderServiceImpl();
         List<String> result = cookieFinderService.getCookiesList(cookiesList, args[1]);
         if(result.isEmpty()) {
+            logger.debug("No active cookies found for the given date");
             System.out.println("No active cookies found for the given date");
         }
         for(String cookie: result) {

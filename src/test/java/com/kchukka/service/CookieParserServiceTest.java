@@ -34,4 +34,20 @@ public class CookieParserServiceTest {
             CookieParserService cookieRecordParser = new CookieParserServiceImpl(cookieFileConfiguration);
             cookieRecordParser.getCookiesList();
     }
+
+    @Test
+    public void test_getCookieMaWithIncorrectTimestampRecord() throws IOException {
+        URL resource = getClass().getClassLoader().getResource("cookies3.csv");
+        CookieFileConfiguration cookieFileConfiguration = new CookieFileConfiguration();
+        cookieFileConfiguration.setFilePath(resource.getPath());
+        cookieFileConfiguration.setDelimiter(",");
+        CookieParserService cookieRecordParser = new CookieParserServiceImpl(cookieFileConfiguration);
+        List<Cookie> cookiesList =
+                cookieRecordParser.getCookiesList();
+        assertNotNull(cookiesList);
+        assertEquals(8, cookiesList.size());
+        Cookie cookie = cookiesList.get(0);
+        assertNotNull(cookie);
+        assertEquals("AtY0laUfhglK3lC7",cookie.getId());
+    }
 }

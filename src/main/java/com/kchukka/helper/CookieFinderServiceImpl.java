@@ -1,17 +1,17 @@
 package com.kchukka.helper;
 
 import com.kchukka.model.Cookie;
-
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Cookie Finder Service Implementation
  *
  */
 public class CookieFinderServiceImpl implements CookieFinderService{
-
+    private static Logger logger = LogManager.getLogger(CookieFinderServiceImpl.class);
     /**
      * return the most active cookies for a specific day
      *
@@ -47,6 +47,7 @@ public class CookieFinderServiceImpl implements CookieFinderService{
         left = matchIndex-1;
         right = matchIndex+1;
         if(foundMatch) {
+            logger.debug("Found matching cookies for given date");
             //check left & right neighbours from mid
             while(left>=0 && isValidCookie(cookiesList.get(left), date)) {
                 Long count = cookieCountMap.getOrDefault(cookiesList.get(left).getId(), 0l);
@@ -58,6 +59,8 @@ public class CookieFinderServiceImpl implements CookieFinderService{
                 cookieCountMap.put(cookiesList.get(right).getId(), ++count);
                 right++;
             }
+        } else {
+            logger.debug("Found no matching cookie for given date");
         }
 
         return cookieCountMap;
@@ -72,7 +75,6 @@ public class CookieFinderServiceImpl implements CookieFinderService{
         List<String> result = new ArrayList<>();
         if(cookieCountMap.values().size()>0) {
             Long maxCount = Collections.max(cookieCountMap.values());
-
             cookieCountMap.forEach((k, v) -> {
                 if (v == maxCount) {
                     result.add(k);
