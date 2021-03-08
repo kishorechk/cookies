@@ -16,7 +16,7 @@ cd cookies
 ```
 
 ## Assumptions
-* the data file will be csv format
+* the data file will be csv format. Each record will be have two fields - cookie, timestamp. The solutio ignores records with invalid timestamp.
 * If multiple cookies meet that criteria, please return all of them on separate lines.
 * -d parameter takes date in UTC time zone.
 * have enough memory to store the contents of the whole file. The solution loads the whole file into memory, then finds the matching records.
