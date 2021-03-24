@@ -1,18 +1,12 @@
 package com.kchukka.app;
 
 import com.kchukka.configuration.CookieFileConfiguration;
-import com.kchukka.model.Cookie;
-import com.kchukka.service.CookieFinderService;
-import com.kchukka.service.CookieFinderServiceImpl;
-import com.kchukka.service.CookieParserService;
-import com.kchukka.service.CookieParserServiceImpl;
+import com.kchukka.service.*;
 import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.net.URL;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 public class AppTest extends TestCase {
     @Test
@@ -22,7 +16,8 @@ public class AppTest extends TestCase {
         cookieFileConfiguration.setFilePath("cookies.csv");
         cookieFileConfiguration.setDelimiter(",");
 
-        CookieParserService cookieParserService = new CookieParserServiceImpl(cookieFileConfiguration);
+        CookieDataService cookieDataService = new FIleCookieDataServiceImpl(cookieFileConfiguration);
+        CookieParserService cookieParserService = new CookieParserServiceImpl(cookieFileConfiguration, cookieDataService);
         CookieFinderService cookieFinderService = new CookieFinderServiceImpl();
 
         App app = new App(cookieFinderService, cookieParserService);
@@ -37,7 +32,8 @@ public class AppTest extends TestCase {
         CookieFileConfiguration cookieFileConfiguration = new CookieFileConfiguration();
         cookieFileConfiguration.setFilePath(resource.getPath());
         cookieFileConfiguration.setDelimiter(",");
-        CookieParserService cookieParserService = new CookieParserServiceImpl(cookieFileConfiguration);
+        CookieDataService cookieDataService = new FIleCookieDataServiceImpl(cookieFileConfiguration);
+        CookieParserService cookieParserService = new CookieParserServiceImpl(cookieFileConfiguration, cookieDataService);
         CookieFinderService cookieFinderService = new CookieFinderServiceImpl();
 
         App app = new App(cookieFinderService, cookieParserService);
@@ -54,8 +50,10 @@ public class AppTest extends TestCase {
         CookieFileConfiguration cookieFileConfiguration = new CookieFileConfiguration();
         cookieFileConfiguration.setFilePath(resource.getPath());
         cookieFileConfiguration.setDelimiter(",");
-        CookieParserService cookieParserService = new CookieParserServiceImpl(cookieFileConfiguration);
+        CookieDataService cookieDataService = new FIleCookieDataServiceImpl(cookieFileConfiguration);
+        CookieParserService cookieParserService = new CookieParserServiceImpl(cookieFileConfiguration, cookieDataService);
         CookieFinderService cookieFinderService = new CookieFinderServiceImpl();
+
 
         App app = new App(cookieFinderService, cookieParserService);
         List<String> result = app.getActiveCookies("2018-12-11");

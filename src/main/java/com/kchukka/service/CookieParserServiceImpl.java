@@ -22,8 +22,11 @@ public class CookieParserServiceImpl implements CookieParserService{
 
     private CookieFileConfiguration cookieFileConfiguration;
 
-    public CookieParserServiceImpl(CookieFileConfiguration cookieFileConfiguration) {
+    private CookieDataService cookieDataService;
+
+    public CookieParserServiceImpl(CookieFileConfiguration cookieFileConfiguration, CookieDataService cookieDataService) {
         this.cookieFileConfiguration = cookieFileConfiguration;
+        this.cookieDataService = cookieDataService;
     }
 
     /**
@@ -34,13 +37,14 @@ public class CookieParserServiceImpl implements CookieParserService{
         String delimiter = cookieFileConfiguration.getDelimiter();
         List<Cookie> result = new ArrayList<>();
 
-        List<String> lines = null;
+        List<String> lines =  cookieDataService.getCookiesList();
+        /*List<String> lines = null;
         try {
             lines = Files.readAllLines(Paths.get(cookieFileConfiguration.getFilePath()));
         } catch (IOException e) {
             logger.error("Unable to read the file, please provide correct file path.");
             throw new RuntimeException("Unable to read the file, please provide correct file path.");
-        }
+        }*/
 
         for(int i=1; i<lines.size(); i++) {
             String[] contents = lines.get(i).split(delimiter);

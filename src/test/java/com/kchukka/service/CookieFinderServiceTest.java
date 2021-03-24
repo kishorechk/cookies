@@ -19,8 +19,9 @@ public class CookieFinderServiceTest {
         CookieFileConfiguration cookieFileConfiguration = new CookieFileConfiguration();
         cookieFileConfiguration.setFilePath(resource.getPath());
         cookieFileConfiguration.setDelimiter(",");
-        CookieParserService CookieParserService = new CookieParserServiceImpl(cookieFileConfiguration);
-        List<Cookie> cookiesList = CookieParserService.getCookiesList();
+        CookieDataService cookieDataService = new FIleCookieDataServiceImpl(cookieFileConfiguration);
+        CookieParserService cookieParserService = new CookieParserServiceImpl(cookieFileConfiguration, cookieDataService);
+        List<Cookie> cookiesList = cookieParserService.getCookiesList();
         CookieFinderService cookieFinderService = new CookieFinderServiceImpl();
         List<String> result = cookieFinderService.getCookiesList(cookiesList, "2018-12-09");
         assertEquals(1, result.size());
@@ -33,8 +34,9 @@ public class CookieFinderServiceTest {
         CookieFileConfiguration cookieFileConfiguration = new CookieFileConfiguration();
         cookieFileConfiguration.setFilePath(resource.getPath());
         cookieFileConfiguration.setDelimiter(",");
-        CookieParserService CookieParserService = new CookieParserServiceImpl(cookieFileConfiguration);
-        List<Cookie> cookiesList = CookieParserService.getCookiesList();
+        CookieDataService cookieDataService = new FIleCookieDataServiceImpl(cookieFileConfiguration);
+        CookieParserService cookieParserService = new CookieParserServiceImpl(cookieFileConfiguration, cookieDataService);
+        List<Cookie> cookiesList = cookieParserService.getCookiesList();
         CookieFinderService cookieFinderService = new CookieFinderServiceImpl();
         List<String> result = cookieFinderService.getCookiesList(cookiesList, "2018-12-08");
         assertEquals(3, result.size());
@@ -49,8 +51,9 @@ public class CookieFinderServiceTest {
         CookieFileConfiguration cookieFileConfiguration = new CookieFileConfiguration();
         cookieFileConfiguration.setFilePath(resource.getPath());
         cookieFileConfiguration.setDelimiter(",");
-        CookieParserService CookieParserService = new CookieParserServiceImpl(cookieFileConfiguration);
-        List<Cookie> cookiesList = CookieParserService.getCookiesList();
+        CookieDataService cookieDataService = new FIleCookieDataServiceImpl(cookieFileConfiguration);
+        CookieParserService cookieParserService = new CookieParserServiceImpl(cookieFileConfiguration, cookieDataService);
+        List<Cookie> cookiesList = cookieParserService.getCookiesList();
         CookieFinderService cookieFinderService = new CookieFinderServiceImpl();
         List<String> result = cookieFinderService.getCookiesList(cookiesList, "2019-12-09");
         assertEquals(0, result.size());
